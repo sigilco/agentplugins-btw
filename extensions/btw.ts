@@ -1114,17 +1114,17 @@ class BtwOverlayComponent extends Container implements Focusable {
   private frameLine(content: string, innerWidth: number): string {
     const truncated = truncateToWidth(content, innerWidth, "");
     const padding = Math.max(0, innerWidth - visibleWidth(truncated));
-    return `${this.theme.fg("borderMuted", "│")}${truncated}${" ".repeat(padding)}${this.theme.fg("borderMuted", "│")}`;
+    return `${this.theme.fg("border", "│")}${truncated}${" ".repeat(padding)}${this.theme.fg("border", "│")}`;
   }
 
   private ruleLine(innerWidth: number): string {
-    return this.theme.fg("borderMuted", `├${"─".repeat(innerWidth)}┤`);
+    return this.theme.fg("border", `├${"─".repeat(innerWidth)}┤`);
   }
 
   private borderLine(innerWidth: number, edge: "top" | "bottom"): string {
     const left = edge === "top" ? "┌" : "└";
     const right = edge === "top" ? "┐" : "┘";
-    return this.theme.fg("borderMuted", `${left}${"─".repeat(innerWidth)}${right}`);
+    return this.theme.fg("border", `${left}${"─".repeat(innerWidth)}${right}`);
   }
 
   private wrapTranscript(innerWidth: number): string[] {
@@ -1207,7 +1207,7 @@ class BtwOverlayComponent extends Container implements Focusable {
     this.input.focused = false;
     try {
       const inputLine = this.input.render(targetWidth)[0] ?? "";
-      return `${this.theme.fg("borderMuted", "│")}${inputLine}${this.theme.fg("borderMuted", "│")}`;
+      return `${this.theme.fg("border", "│")}${inputLine}${this.theme.fg("border", "│")}`;
     } finally {
       this.input.focused = previousFocused;
     }

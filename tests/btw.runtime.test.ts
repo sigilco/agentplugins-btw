@@ -1542,14 +1542,14 @@ describe("btw runtime behavior", () => {
     const assistantBodyLine = populatedLines.find((line: string) => line.includes("First answer"));
 
     expect(emptyLines.length).toBe(populatedLines.length);
-    expect(emptyLines[0]).toContain("<fg:borderMuted>┌");
+    expect(emptyLines[0]).toContain("<fg:border>┌");
     expect(emptyLines[0]).not.toContain("<fg:accent>┌");
-    expect(emptyLines.at(-1)).toContain("<fg:borderMuted>└");
+    expect(emptyLines.at(-1)).toContain("<fg:border>└");
     expect(emptyLines.at(-1)).not.toContain("<fg:accent>└");
-    expect(emptyStateLine).toContain("<fg:borderMuted>│</fg:borderMuted><fg:dim>No BTW thread yet.");
-    expect(emptyStateLine).not.toContain("<fg:borderMuted>│</fg:borderMuted> <fg:dim>No BTW thread yet.");
-    expect(assistantBodyLine).toContain("<fg:borderMuted>│</fg:borderMuted>    First answer");
-    expect(inputLine).toContain("<fg:borderMuted>│</fg:borderMuted>> ");
+    expect(emptyStateLine).toContain("<fg:border>│</fg:border><fg:dim>No BTW thread yet.");
+    expect(emptyStateLine).not.toContain("<fg:border>│</fg:border> <fg:dim>No BTW thread yet.");
+    expect(assistantBodyLine).toContain("<fg:border>│</fg:border>    First answer");
+    expect(inputLine).toContain("<fg:border>│</fg:border>> ");
     expect(inputLine).not.toContain("\x1b_pi:c\x07");
   });
 
