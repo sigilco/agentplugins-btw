@@ -1001,6 +1001,9 @@ function notify(ctx: ExtensionContext | ExtensionCommandContext, message: string
   }
 }
 
+/** Fixed overlay rows outside the transcript viewport (must match render() structure). */
+const BTW_OVERLAY_CHROME_LINES = 9;
+
 function getOverlayTitle(mode: BtwThreadMode): string {
   return mode === "tangent" ? "BTW tangent" : "BTW";
 }
@@ -1218,7 +1221,7 @@ class BtwOverlayComponent extends Container implements Focusable {
     const innerWidth = Math.max(22, dialogWidth - 2);
     const transcriptLines = this.wrapTranscript(innerWidth);
     const dialogHeight = this.getDialogHeight();
-    const chromeHeight = 8;
+    const chromeHeight = BTW_OVERLAY_CHROME_LINES;
     const transcriptHeight = Math.max(6, dialogHeight - chromeHeight);
     this.transcriptViewportHeight = transcriptHeight;
 
