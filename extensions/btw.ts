@@ -1209,11 +1209,17 @@ class BtwOverlayComponent extends Container implements Focusable {
     // the row stays geometrically stable while the overlay still owns keyboard input.
     this.input.focused = false;
     try {
-      const inputLine = this.input.render(targetWidth)[0] ?? "";
-      return `${this.theme.fg("border", "│")}${inputLine}${this.theme.fg("border", "│")}`;
+      const renderedInputLine = this.input.render(targetWidth)[0] ?? "";
+      const inputLine = truncateToWidth(renderedInputLine, targetWidth, "");
+      const padding = Math.max(0, targetWidth - visibleWidth(inputLine));
+      return `${this.theme.fg("border", "│")}${inputLine}${" ".repeat(padding)}${this.theme.fg("border", "│")}`;
     } finally {
       this.input.focused = previousFocused;
     }
+  }
+
+  private fitRenderedLine(line: string, width: number): string {
+    return visibleWidth(line) > width ? truncateToWidth(line, width, "") : line;
   }
 
   override render(width: number): string[] {
@@ -1266,7 +1272,7 @@ class BtwOverlayComponent extends Container implements Focusable {
     lines.push(this.frameLine(this.theme.fg("dim", this.hintsTextValue.trim()), innerWidth));
     lines.push(this.borderLine(innerWidth, "bottom"));
 
-    return lines;
+    return lines.map((line) => this.fitRenderedLine(line, width));
   }
 
   setDraft(value: string): void {

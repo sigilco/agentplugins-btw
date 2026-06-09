@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { ExtensionAPI, ExtensionCommandContext, ExtensionContext, RegisteredCommand } from "@earendil-works/pi-coding-agent";
+import { visibleWidth } from "@earendil-works/pi-tui";
 import btwExtension from "../extensions/btw";
 
 const { promptStreamMock, createAgentSessionMock, sessionManagerInMemoryMock, subSessionRecords } = vi.hoisted(() => ({
@@ -2117,6 +2118,21 @@ describe("btw runtime behavior", () => {
         { role: "assistant", content: [{ type: "text", text: "keep assistant" }] },
       ],
     });
+  });
+
+  it("keeps every overlay line within the supplied width when the draft is longer than the terminal", async () => {
+    const harness = createHarness();
+    await harness.runSessionStart();
+    await harness.command("btw", "");
+    const overlay = harness.latestOverlayComponent();
+
+    overlay.setDraft("x".repeat(200));
+    const lines = overlay.render(79) as string[];
+    const inputLine = lines.at(-3) ?? "";
+
+    expect(lines.every((line) => visibleWidth(line) <= 79)).toBe(true);
+    expect(visibleWidth(inputLine)).toBe(79);
+    expect(inputLine.endsWith("│")).toBe(true);
   });
 
   describe("overlay render height vs maxHeight", () => {
