@@ -1,28 +1,29 @@
 {
-  "name": "pi-btw",
-  "version": "0.4.1",
-  "description": "A pi extension for parallel side conversations with /btw",
+  "name": "agentplugins-btw",
+  "version": "1.0.0",
+  "description": "Parallel side conversations for AI agents. Pi gets the full TUI overlay; all other tier-1 harnesses get functional side-thread parity.",
   "type": "module",
   "license": "MIT",
   "author": "Dan Bachelder",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dbachelder/pi-btw.git"
+    "url": "git+https://github.com/espetro/agentplugins-btw.git"
   },
-  "homepage": "https://github.com/dbachelder/pi-btw#readme",
-  "bugs": {
-    "url": "https://github.com/dbachelder/pi-btw/issues"
-  },
+  "homepage": "https://github.com/espetro/agentplugins-btw#readme",
   "keywords": [
+    "agentplugins",
+    "btw",
+    "side-conversation",
     "pi-package",
-    "pi-extension",
-    "pi-coding-agent",
-    "agent",
-    "tui"
+    "opencode-plugin",
+    "claude-code",
+    "codex"
   ],
   "files": [
     "extensions",
+    "skills",
     "docs",
+    "agentplugins.config.ts",
     "README.md",
     "LICENSE"
   ],
@@ -30,16 +31,10 @@
     "access": "public"
   },
   "scripts": {
+    "build": "agentplugins build",
+    "validate": "agentplugins validate",
+    "lint": "agentplugins lint",
     "test": "vitest --run"
-  },
-  "pi": {
-    "extensions": [
-      "./extensions/btw.ts"
-    ],
-    "skills": [
-      "./skills"
-    ],
-    "image": "https://raw.githubusercontent.com/dbachelder/pi-btw/main/docs/btw-overlay.png"
   },
   "peerDependencies": {
     "@earendil-works/pi-ai": ">=0.74.0 <1",
@@ -47,6 +42,7 @@
     "@earendil-works/pi-tui": ">=0.74.0 <1"
   },
   "devDependencies": {
+    "@agentplugins/core": "^0.3.0",
     "typescript": "^6.0.2",
     "vitest": "^4.1.0"
   }
