@@ -42,7 +42,7 @@
     "@earendil-works/pi-tui": ">=0.74.0 <1"
   },
   "devDependencies": {
-    "@agentplugins/core": "^0.3.0",
+    "@agentplugins/core": "^0.6.0",
     "typescript": "^6.0.2",
     "vitest": "^4.1.0"
   }
